@@ -1,0 +1,17 @@
+site_name: Citrix Virtual Channel SDK for Citrix Receiver for Windows
+site_description: Reference for the Citrix Virtual Channel SDK for Citrix Receiver for Windows
+theme_dir: theme_multi
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+     anchorlink: True
+
+pages:
+- Introduction: index.md
+- System Requirements: system-requirements.md
+- Build Process: build-process.md
+- Using the Virtual Channel SDK: using-the-sdk.md
+- Using Example Programs: using-example-programs.md
+- Programming Guide: programming-guide.md
+- Programming Reference: programming-reference.md
