@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>None/</loc>
+     <lastmod>2017-02-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/system-requirements/</loc>
+     <lastmod>2017-02-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/build-process/</loc>
+     <lastmod>2017-02-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/using-the-sdk/</loc>
+     <lastmod>2017-02-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/using-example-programs/</loc>
+     <lastmod>2017-02-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/programming-guide/</loc>
+     <lastmod>2017-02-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/programming-reference/</loc>
+     <lastmod>2017-02-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+</urlset>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Programming Guide - Citrix Virtual Channel SDK for Citrix Receiver for Windows</title>
+  
+
+  <link rel="shortcut icon" href="
+https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  <link rel="stylesheet" href="../css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../css/font-awesome.css" type="text/css" />
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Programming Guide";
+    var mkdocs_page_input_path = "programming-guide.md";
+    var mkdocs_page_url = "/programming-guide/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/custom.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+	<div class="header-top">
+		<div class="header-top-left">
+			<a href="http://citrix.github.io" class="logo-position"><img height="60" src="https://thumbnail-ec2.sharefile.com/thumbnail.aspx?encparams=ypL2J0l-In6gqXJ7yeyKP8A1rqwKMH-C8-nfkJcHJNIN7Y0yZiJsYOcUe-uc0YeZzWLQSFSd1FnuMHPa30XSSINHuGOA8nvvnBT5WmjGlKvd5mxJ4IfT7iTVyHELwhWQiNCznPCiIFyhkA78uKX77PlU2iyhM4YdRM1NKabBe-4wXuiFJsbtAxyJ2UukO_E2ZSf1W3l75Dw8G0zflVkT-EFqyx1zSGId0qzLjm6nzJ8dA9zo-1AJzUisdzmGMzHOq_LMsOWyaalvmcWvCkl-q10GBSbfekfTIFW9LpZNYjkLNSnK8rcwNjWVr_jYayrGjIj2e5dDIMiDj3NRvW51AvHRjxYH9xRRRtY$" target="_blank" class="logo-citrix"><span style="color:#fff;font-size: 20px;position: relative;top:4px;left: 5px">SDK Reference</span></a>
+		</div>
+		<div class="header-top-right">
+			<ul>
+			<!--	<li class="list-inline home"><a href="..">HOME</a></li>
+				<li class="list-inline support"><a href="http://support.citrix.com">SUPPORT</a></li>-->
+				<form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+            <li class="list-inline support"><input name="q" id="txtName" type="text" placeholder="Search SDKs" 
+            class="searchdocs">
+<a class="fa fa-search errspan"></a></li>
+</form>
+				<!--<li class="list-inline"><a href="http://citrix.com/download">DOWNLOADS</a></li>-->
+			</ul>
+
+		</div>
+	</div>
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+	<i class="fa fa-search"></i>
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" style="width:250px;" href="..">Introduction</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" style="width:250px;" href="../system-requirements/">System Requirements</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" style="width:250px;" href="../build-process/">Build Process</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" style="width:250px;" href="../using-the-sdk/">Using the Virtual Channel SDK</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" style="width:250px;" href="../using-example-programs/">Using Example Programs</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <span class="expli"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span><a class="current" style="width:250px;" href="./">Programming Guide</a>
+        
+            <ul style="display:none">
+            
+                <li class="toctree-l3"><a href="#programming-guide">Programming Guide</a></li>
+                
+                    <li><a class="toctree-l4" href="#design-suggestions">Design Suggestions</a></li>
+                
+                    <li><a class="toctree-l4" href="#server-side-functions-overview">Server-Side Functions Overview</a></li>
+                
+                    <li><a class="toctree-l4" href="#client-side-functions-overview">Client-Side Functions Overview</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" style="width:250px;" href="../programming-reference/">Programming Reference</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+         <!-- <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Programming Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div> -->
+          <div role="main">
+            <div class="section">
+             
+                <h1 id="programming-guide"><a class="toclink" href="#programming-guide">Programming Guide</a></h1>
+<p>Virtual channels are referred to by a seven-character (or shorter) ASCII
+name. In several previous versions of the ICA protocol, virtual channels
+were numbered; the numbers are now assigned dynamically based on the
+ASCII name, making implementation easier.</p>
+<p>When developing virtual channel code for internal use only, you can use
+any seven-character name that does not conflict with existing virtual
+channels. Use only upper and lowercase ASCII letters and numbers. Follow
+the existing naming convention when adding your own virtual channels.</p>
+<p>The predefined channels, which begin with the OEM identifier CTX, are
+for use only by Citrix.</p>
+<h2 id="design-suggestions"><a class="toclink" href="#design-suggestions">Design Suggestions</a></h2>
+<p>Follow these suggestions to make your virtual channels easier to design
+and enhance:</p>
+<ul>
+<li>When you design your own virtual
+channel protocol, allow for the flexibility to add features. Virtual
+channels have version numbers that are exchanged during initialization
+so that both the client and the server detect the maximum level of
+functionality that can be used. For example, if the client is at
+Version 3 and the server is at Version 5, the server does not send any
+packets with functionality beyond Version 3 because the client does
+not know how to interpret the newer packets.</li>
+<li>Because the server side of a virtual
+channel protocol can be implemented as a separate process, it is
+easier to write code that interfaces with the Citrix-provided virtual
+channel support on the server than on the client (where the code must
+fit into an existing code structure). The server side of a virtual
+channel simply opens the channel, reads from and writes to it, and
+closes it when done.
+Writing code for the server-side is similar to writing an application,
+which uses services exported by the system. It is easier to write an
+application to handle the virtual channel communication because it can
+then be run once for each ICA connection supporting the virtual
+channel.
+Writing for the client-side is similar to writing a driver, which must
+provide services to the system in addition to using system services.
+If a service is written, it must manage multiple connections.</li>
+<li>If you are designing new hardware for
+use with new virtual channels (for example, an improved compressed
+video format), make sure the hardware can be detected so that the
+client can determine whether or not it is installed. Then the client
+can communicate to the server if the hardware is available before the
+server uses the new data format. Optionally, you could have the
+virtual driver translate the new data format for use with older
+hardware.</li>
+<li>There might be limitations preventing
+your new virtual channel from performing at an optimum level. If the
+client is connecting to the server running XenApp through a modem or
+serial connection, the bandwidth might not be great enough to properly
+support audio or video data. You can make your protocol adaptive, so
+that as bandwidth decreases, performance degrades gracefully, possibly
+by sending sound normally but reducing the frame rate of the video to
+fit the available bandwidth.</li>
+<li>To identify where problems are
+occurring (connection, implementation, or protocol), first get the
+connection and communication working. Then, after the virtual channel
+is complete and debugged, do some time trials and record the results.
+These results establish a baseline for measuring further optimizations
+such as compression and other enhancements so that the channel
+requires less bandwidth.</li>
+<li>The time stamp in the pVdPoll variable
+can be helpful for resolving timing issues in your virtual driver. It
+is a ULONG containing the current time in milliseconds. The pVdPoll
+variable is a pointer to a DLLPOLL structure. See Dllapi.h (in
+src/inc/) for definitions of these structures.</li>
+</ul>
+<h2 id="server-side-functions-overview"><a class="toclink" href="#server-side-functions-overview">Server-Side Functions Overview</a></h2>
+<p>Server-side functions are entry points to virtual channel services
+provided by the ICAsubsystem on the XenApp or XenDesktop server. Wfapi.h
+contains constants and function prototypes.</p>
+<p>Use these functions to open and close virtual channels and to read,
+write, query, and purge incoming or outgoing data.</p>
+<p>The words IN and OUT in the function calling conventions are for
+clarification only. They are defined as blank in Windef.h. If you do not
+have access to Windef.h, add the following to a header file for your
+project:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#ifndef IN</span>
+<span class="cp">#define IN</span>
+<span class="cp">#endif</span>
+<span class="cp">#ifndef OUT</span>
+<span class="cp">#endif</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WFVirtualChannelClose</td>
+<td>Closes an open virtual channel handle.</td>
+</tr>
+<tr>
+<td>WFVirtualChannelOpen</td>
+<td>Opens a handle to a specific virtual channel.</td>
+</tr>
+<tr>
+<td>WFVirtualChannelPurgeInput</td>
+<td>Purges all queued input data sent from the client to the server on a specific virtual channel.</td>
+</tr>
+<tr>
+<td>WFVirtualChannelPurgeOutput</td>
+<td>Purges all queued output data sent from the server to the client on a specific virtual channel.</td>
+</tr>
+<tr>
+<td>WFVirtualChannelQuery</td>
+<td>Returns data related to a virtual channel.</td>
+</tr>
+<tr>
+<td>WFVirtualChannelRead</td>
+<td>Reads data from a virtual channel.</td>
+</tr>
+<tr>
+<td>WFVirtualChannelWrite</td>
+<td>Writes data to a virtual channel.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="client-side-functions-overview"><a class="toclink" href="#client-side-functions-overview">Client-Side Functions Overview</a></h2>
+<p>The client software is built on a modular configurable architecture that
+allows replaceable, configurable modules (such as virtual channel
+drivers) to handle various aspects of an ICA connection. These modules
+are specially formatted and dynamically loadable. To accomplish this
+modular capability, each module (including virtual channel drivers)
+implements a fixed set of function entry points.</p>
+<p>There are three groups of functions: user-defined, virtual driver
+helper, and memory INI.</p>
+<h3 id="user-defined-functions"><a class="toclink" href="#user-defined-functions">User-defined Functions</a></h3>
+<p>To make writing virtual channels easier, dynamic loading is handled by
+the WinStation driver, which in turn calls user-defined functions. This
+simplifies creating the virtual channel because all you have to do is
+fill in the functions and link your virtual channel driver with
+Vdapi.lib (provided with this SDK).</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DriverClose</td>
+<td>Frees private driver data. Called before unloading a virtual driver (generally upon client exit).</td>
+</tr>
+<tr>
+<td>DriverGetLastError</td>
+<td>Returns the last error set by the virtual driver. Not used; links with the common front end, VDAPI.</td>
+</tr>
+<tr>
+<td>DriverInfo</td>
+<td>Retrieves information about the virtual driver.</td>
+</tr>
+<tr>
+<td>DriverOpen</td>
+<td>Performs all initialization for the virtual driver. Called once when the client loads the virtual driver (at startup).</td>
+</tr>
+<tr>
+<td>DriverPoll</td>
+<td>Allows driver to check timers and other state information, sends queued data to the server, and performs any other required processing. Called periodically to see if the virtual driver has any data to write.</td>
+</tr>
+<tr>
+<td>DriverQueryInformation</td>
+<td>Retrieves run-time information from the virtual driver.</td>
+</tr>
+<tr>
+<td>DriverSetInformation</td>
+<td>Sets run-time information in the virtual driver.</td>
+</tr>
+<tr>
+<td>ICADataArrival</td>
+<td>Indicates that data was delivered. Called when data arrives on the virtual channel.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="virtual-driver-helper-functions"><a class="toclink" href="#virtual-driver-helper-functions">Virtual Driver Helper Functions</a></h3>
+<p>The virtual driver uses helper functions to send data and manage the
+virtual channel. When the WinStation driver initializes the virtual
+driver, the WinStation driver passes pointers to the helper functions
+and the virtual driver passes pointers to the user-defined functions.</p>
+<p>VdCallWd is linked in as part of VDAPI and is available in all
+user-implemented functions. The others are obtained during DriverOpen
+when VdCallWd is called with the WDxSETINFORMATION parameter.</p>
+<p>Virtual channel drivers can send data from private buffers via the
+SendData or QueueVirtualWrite functions obtained during DriverOpen.
+Either of these functions may decline to accept the data if the
+WinSation Driver itself cannot buffer it. The channel will then need to
+retry the send operation on the next DriverPoll.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SendData</td>
+<td>To send a packet of channel protocol to the server, with a notification option.</td>
+</tr>
+<tr>
+<td>QueueVirtualWrite</td>
+<td>To send a packet of channel protocol to the server. This is a legacy function. Use SendData above for new virtual drivers.</td>
+</tr>
+<tr>
+<td>VdCallWd</td>
+<td>Used to query and set information from the WinStation driver (WD).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="memory-ini-functions"><a class="toclink" href="#memory-ini-functions">Memory INI Functions</a></h3>
+<p>Memory INI functions read data that the client engine reads from the
+Configuration Storage in the registry and stored in a memory INI
+structure. These functions must be used because some client devices
+store this information in ROM, and only the engine has access to this
+INI data. The Memory INI functions read values from this Memory INI
+structure as if the values are being read from the Configuration
+Storage. The Configuration Storage for specifying virtual channels is in
+Software\Citrix\ICA Client\Configuration\Advanced\Modules.</p>
+<p>Important: Access to configuration data might be limited depending on
+security restrictions . In particular, the virtual channel might not
+have access to all contents of the ICA file. This is controlled by
+registry keys in HKEY_LOCAL_MACHINE\SOFTWARE\Citrix\ICA
+Client\Engine\Lock down Profiles\All Regions\Lock down. You can use
+Memory INI functions read data from the client engine configuration
+files stored in both the client installation directory for system wide
+settings and $HOME/.ICAClient for user specific settings.</p>
+<p>For each entry in appsrv.ini and wfclient.ini, there must be a
+corresponding entry in All_Regions.ini for the setting to take effect.
+For more information, refer to All_Regions.ini file in the
+$ICAROOT/config directory.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>miGetPrivateProfileBool</td>
+<td>Returns a boolean value.</td>
+</tr>
+<tr>
+<td>miGetPrivateProfileInt</td>
+<td>Returns an integer value.</td>
+</tr>
+<tr>
+<td>miGetPrivateProfileLong</td>
+<td>Returns a long value.</td>
+</tr>
+<tr>
+<td>miGetPrivateProfileString</td>
+<td>Returns a string value.</td>
+</tr>
+</tbody>
+</table>
+              
+               
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<!--<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span class="prev"><a href="../using-example-programs/"><i class="fa fa-angle-left"></i> Previous</a></span>
+      
+      
+        <span class="next"><a href="../programming-reference/">Next <i class="fa fa-angle-right"></i></a></span>
+      
+    </span>
+	<div class="footer-right">
+		<ul class="social-links">
+			<li class="list-inline"><a href="https://twitter.com/citrix"><i class="fa fa-twitter"></i>@citrix</a></li>
+			<li class="list-inline"><a href="mailto:support@citrix.com"><i class="fa fa-envelope-o"></i>support@citrix.com</a></li>
+		</ul>
+		<ul class="inner-pages">
+			<li class="list-inline"><a href="http://citrix.com/about/legal">Privacy and Terms</li>
+		</ul>
+	</div>
+</div>-->
+
+</body>
+</html>
