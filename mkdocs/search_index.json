@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/system-requirements/", 
-            "text": "System Requirements\n\n\nCitrix Virtual Channel SDK can be installed on systems supported by\nCitrix Receiver for Windows. You can build the virtual drivers and\napplications on any platform. To run, they require a server running\nXenApp or XenDesktop.\n\n\nDevelopment Environment Requirements\n\n\nUse Microsoft Visual Studio 2008 and .NET 4.0. Server-side development\nalso requires the WFAPI SDK.\n\n\nAlthough the compiler software packages include C++, only C code is used\nin this SDK. This SDK has not been tested with any other compilers or\nany other combinations.\n\n\nExecution Environment Requirements\n\n\nServer requirement\n\n\nThe Windows Virtual Channel SDK is supported on Citrix XenApp 6.5 (or later) and Citrix XenDesktop 7.6 (or later)\n\n\nClient Requirement\n\n\nCitrix Receiver for Windows 4.6", 
+            "text": "System Requirements\n\n\nCitrix Virtual Channel SDK can be installed on systems supported by\nCitrix Receiver for Windows. You can build the virtual drivers and\napplications on any platform. To run, they require a server running\nXenApp or XenDesktop.\n\n\nDevelopment Environment Requirements\n\n\nUse Microsoft Visual Studio 2008 and .NET 4.0. Server-side development\nalso requires the WFAPI SDK.\n\n\nAlthough the compiler software packages include C++, only C code is used\nin this SDK. This SDK has not been tested with any other compilers or\nany other combinations.\n\n\nExecution Environment Requirements\n\n\nServer requirement\n\n\nThe Windows Virtual Channel SDK is supported on Citrix XenApp 6.5 (or later) and Citrix XenDesktop 7.6 (or later)\n\n\nClient Requirement\n\n\nCitrix Receiver for Windows 4.7", 
             "title": "System Requirements"
         }, 
         {
@@ -37,7 +37,7 @@
         }, 
         {
             "location": "/system-requirements/#client-requirement", 
-            "text": "Citrix Receiver for Windows 4.6", 
+            "text": "Citrix Receiver for Windows 4.7", 
             "title": "Client Requirement"
         }, 
         {
