@@ -20,4 +20,4 @@ any other combinations.
 The Windows Virtual Channel SDK is supported on Citrix XenApp 6.5 (or later) and Citrix XenDesktop 7.6 (or later)
 
 ### Client Requirement
-Citrix Receiver for Windows 4.6
+Citrix Receiver for Windows 4.7
