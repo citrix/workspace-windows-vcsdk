@@ -1,150 +1,148 @@
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Reference for the Citrix Virtual Channel SDK for Citrix Receiver for Windows">
-  
-  
-  <title>Citrix Virtual Channel SDK for Citrix Receiver for Windows</title>
-  
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+  <!--<![endif]-->
 
-  <link rel="shortcut icon" href="
-https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="description" content="Reference for the Citrix Virtual Channel SDK for Citrix Receiver for Windows">  
+    <title>Citrix Virtual Channel SDK for Citrix Receiver for Windows</title>
+     
+    <link rel="shortcut icon" href="
+https://www.citrix.com/etc/designs/citrix/icon-favicon.png"> 
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+    <link rel="stylesheet" href="./css/highlight.css">
+    <link rel="stylesheet" href="./css/override.css" type="text/css" />
+    <link rel="stylesheet" href="./css/font-awesome.css" type="text/css" /> 
+    <script>
+      // Current page data
+      var mkdocs_page_name = "None";
+      var mkdocs_page_input_path = "index.md";
+      var mkdocs_page_url = "/";
 
-  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="./css/highlight.css">
-  <link rel="stylesheet" href="./css/override.css" type="text/css" />
-  <link rel="stylesheet" href="./css/font-awesome.css" type="text/css" />
-
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "None";
-    var mkdocs_page_input_path = "index.md";
-    var mkdocs_page_url = "/";
-  </script>
-  
-  <script src="./js/jquery-2.1.1.min.js"></script>
-  <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script>
-  <script src="./js/theme.js"></script>
-  <script src="./js/custom.js"></script> 
-
-  
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-	<div class="header-top">
-		<div class="header-top-left">
-			<a href="http://citrix.github.io" class="logo-position"><img height="60" src="https://thumbnail-ec2.sharefile.com/thumbnail.aspx?encparams=ypL2J0l-In6gqXJ7yeyKP8A1rqwKMH-C8-nfkJcHJNIN7Y0yZiJsYOcUe-uc0YeZzWLQSFSd1FnuMHPa30XSSINHuGOA8nvvnBT5WmjGlKvd5mxJ4IfT7iTVyHELwhWQiNCznPCiIFyhkA78uKX77PlU2iyhM4YdRM1NKabBe-4wXuiFJsbtAxyJ2UukO_E2ZSf1W3l75Dw8G0zflVkT-EFqyx1zSGId0qzLjm6nzJ8dA9zo-1AJzUisdzmGMzHOq_LMsOWyaalvmcWvCkl-q10GBSbfekfTIFW9LpZNYjkLNSnK8rcwNjWVr_jYayrGjIj2e5dDIMiDj3NRvW51AvHRjxYH9xRRRtY$" target="_blank" class="logo-citrix"><span style="color:#fff;font-size: 20px;position: relative;top:4px;left: 5px">SDK Reference</span></a>
-		</div>
-		<div class="header-top-right">
-			<ul>
-			<!--	<li class="list-inline home"><a href=".">HOME</a></li>
-				<li class="list-inline support"><a href="http://support.citrix.com">SUPPORT</a></li>-->
-				<form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-            <li class="list-inline support"><input name="q" id="txtName" type="text" placeholder="Search SDKs" 
-            class="searchdocs">
-<a class="fa fa-search errspan"></a></li>
-</form>
-				<!--<li class="list-inline"><a href="http://citrix.com/download">DOWNLOADS</a></li>-->
-			</ul>
-
-		</div>
-	</div>
-  <div class="wy-grid-for-nav">
-
+    </script>
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-      <div class="wy-side-nav-search">
-        <div role="search">
+    <script src="./js/jquery-2.1.1.min.js"></script>
+    <script src="./js/modernizr-2.8.3.min.js"></script>
+    <script type="text/javascript" src="./js/highlight.pack.js"></script>
+    <script src="./js/theme.js"></script>
+    <script src="./js/custom.js"></script>  
+  </head>
+
+  <body class="wy-body-for-nav" role="document">
+
+    <div class="header-top">
+      
+        <div class="header-top-left">
+          <a href="http://citrix.github.io" class="logo-position"><img height="60" src="./img/citrixlogoblack.png" target="_blank" class="logo-citrix"><span style="color:#000;font-size: 20px;position: relative;top:4px;left:20px;">Developer Documentation</span></a>
+        </div>
+        <div class="header-top-right">
+          <ul>
+
+            <form id="rtd-search-form" class="wy-form" action="./search.html" method="get">
+             <ul class="header-elements">
+              <li class="list-inline support">
+                <input name="q" id="txtName" type="text" placeholder="Search SDKs" class="searchdocs">
+                <a class="fa fa-search errspan"></a>
+              </li>
+             <li> <a href="javascript:void(0);" style="font-size: 22px;position: relative;left: -10px;top: 3px"><i class="fa fa-globe"></i></a></li>
+             </ul>
+            </form>
+
+          </ul>
+
+        </div>
+      
+    </div>
+    <div class="body">
+      <div class="wy-grid-for-nav">
+
+        
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+          <div class="wy-side-nav-search">
+            <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
 	<i class="fa fa-search"></i>
     <input type="text" name="q" placeholder="Search docs" />
   </form>
 </div>
-      </div>
+          </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
-          
-            <li>
+          <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+            <ul class="current">
+              
+              
     <li class="toctree-l1 current">
-        <span class="expli"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span><a class="current" style="width:250px;" href=".">Introduction</a>
-        
-            <ul style="display:none">
+        <a class="toctree-l1-a current" href=".">Introduction</a>
+		
+            <ul style="margin-left: 0px;padding-left:15px;border-left: 1px solid #b2b2b2;">
             
-                <li class="toctree-l3"><a href="#citrix-virtual-channel-sdk-for-citrix-receiver-for-windows">Citrix Virtual Channel SDK for Citrix Receiver for Windows</a></li>
+                <li class="toctree-l3"><a href="#citrix-virtual-channel-sdk-for-citrix-receiver-for-windows" style="padding:0px;position: relative;">&nbsp;Citrix Virtual Channel SDK for Citrix Receiver for Windows</a></li>
                 
             
             </ul>
         
     </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="system-requirements/">System Requirements</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="build-process/">Build Process</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="using-the-sdk/">Using the Virtual Channel SDK</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="using-example-programs/">Using Example Programs</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="programming-guide/">Programming Guide</a>
-        
-    </li>
-<li>
-          
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="programming-reference/">Programming Reference</a>
-        
-    </li>
-<li>
-          
-        </ul>
-      </div>
-      &nbsp;
-    </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+			  
+              
+    <li class="toctree-l1 ">
+        <a class="toctree-l1-a " href="system-requirements/">System Requirements</a>
+		
+    </li>
 
-      
+			  
+              
+    <li class="toctree-l1 ">
+        <a class="toctree-l1-a " href="build-process/">Build Process</a>
+		
+    </li>
 
+			  
+              
+    <li class="toctree-l1 ">
+        <a class="toctree-l1-a " href="using-the-sdk/">Using the Virtual Channel SDK</a>
+		
+    </li>
 
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-         <!-- <div role="navigation" aria-label="breadcrumbs navigation">
+			  
+              
+    <li class="toctree-l1 ">
+        <a class="toctree-l1-a " href="using-example-programs/">Using Example Programs</a>
+		
+    </li>
+
+			  
+              
+    <li class="toctree-l1 ">
+        <a class="toctree-l1-a " href="programming-guide/">Programming Guide</a>
+		
+    </li>
+
+			  
+              
+    <li class="toctree-l1 ">
+        <a class="toctree-l1-a " href="programming-reference/">Programming Reference</a>
+		
+    </li>
+
+			  
+            </ul>
+          </div>
+          &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+           
+          <div class="wy-nav-content">
+            <div class="rst-content">
+              <!-- <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".">Docs</a> &raquo;</li>
     
@@ -157,10 +155,22 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
   </ul>
   <hr/>
 </div> -->
-          <div role="main">
-            <div class="section">
-             
-                <h1 id="citrix-virtual-channel-sdk-for-citrix-receiver-for-windows"><a class="toclink" href="#citrix-virtual-channel-sdk-for-citrix-receiver-for-windows">Citrix Virtual Channel SDK for Citrix Receiver for Windows</a></h1>
+              <div role="main">
+                <div class="section">
+                <div class="file-format">
+                 <div class="leftAlign" style="float: left;visibility: hidden;">
+                  </div>
+                  <div class="rightAlign" style="float: right;">
+                      <span>Download full document:</span>
+                      <ul class="file-types">
+                        <li><a style="border: 1px solid #EE3D24;padding: 5px;font-size: 11px;color: #EE3D24;border-radius: 5px;font-weight: 700">PDF</a></li>
+                        <li><a style="border: 1px solid #2A579A;padding: 5px;font-size: 11px;color: #2A579A;border-radius: 5px;font-weight: 700">DOCX</a></li>
+                        <li><a style="border: 1px solid #495164;padding: 5px;font-size: 11px;color: #495164;border-radius: 5px;font-weight: 700">EMAIL</a></li>
+                        <li><a style="border: 1px solid #495164;padding: 5px;font-size: 11px;color: #495164;border-radius: 5px;font-weight: 700">PRINT</a></li>
+                      </ul>
+                  </div>
+                  </div>
+                   <h1 id="citrix-virtual-channel-sdk-for-citrix-receiver-for-windows"><a class="toclink" href="#citrix-virtual-channel-sdk-for-citrix-receiver-for-windows">Citrix Virtual Channel SDK for Citrix Receiver for Windows</a></h1>
 <p>The Citrix Virtual Channel Software Development Kit (SDK) provides
 support for writing server-side applications and client-side drivers for
 additional virtual channels using the ICA protocol. The server-side
@@ -189,20 +199,19 @@ demonstrate programming techniques.</p>
 <p>The Virtual Channel SDK requires the WFAPI SDK to write the server
 side of the virtual channel.</p>
 </li>
-</ul>
-              
-               
+</ul> 
+
+                </div>
+              </div>
+
             </div>
           </div>
 
-        </div>
+        </section>
+
       </div>
-
-    </section>
-
-  </div>
-
-<!--<div class="rst-versions" role="note" style="cursor: pointer">
+    </div>
+    <!--<div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -221,10 +230,11 @@ side of the virtual channel.</p>
 	</div>
 </div>-->
 
-</body>
+  </body>
+
 </html>
 
 <!--
-MkDocs version : 0.15.3
-Build Date UTC : 2017-02-22 12:49:24.641967
+MkDocs version : 0.16.1
+Build Date UTC : 2017-05-11 11:58:59
 -->

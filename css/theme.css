@@ -3378,7 +3378,7 @@ html {
     margin-bottom: 0!important
 }
 a {
-    color: #2980B9
+    color: #0b78bc
 }
 a:hover {
     color: #3091d1
@@ -3391,7 +3391,7 @@ html {
 }
 body {
     font-weight: 300;
-    color: #404040;
+    color: #000000;
     min-height: 100%;
     background: #edf0f2
 }
@@ -3940,7 +3940,7 @@ div[class^=highlight] pre {
 }
 .wy-menu-vertical a {
     line-height: 18px;
-    padding: .4045em 1.618em;
+    padding: .2045em 1em;
     display: inline-block;
     position: relative;
     font-size: 90%;
@@ -4273,12 +4273,7 @@ nav.stickynav {
     color: #fcfcfc
 }
 .rst-versions.rst-badge {
-    width: auto;
-    bottom: 20px;
-    right: 20px;
-    left: auto;
-    border: none;
-    max-width: 300px
+    display: none !important;
 }
 .rst-versions.rst-badge .fa-book,
 .rst-versions.rst-badge .icon-book {
