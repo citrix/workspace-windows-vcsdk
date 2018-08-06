@@ -13,64 +13,29 @@ the existing naming convention when adding your own virtual channels.
 The predefined channels, which begin with the OEM identifier CTX, are
 for use only by Citrix.
 
-
 ## Design Suggestions
 
-Follow these suggestions to make your virtual channels easier to design
-and enhance:
+Follow these suggestions to make your virtual channels easier to design and enhance:
 
-* When you design your own virtual
-channel protocol, allow for the flexibility to add features. Virtual
-channels have version numbers that are exchanged during initialization
-so that both the client and the server detect the maximum level of
-functionality that can be used. For example, if the client is at
-Version 3 and the server is at Version 5, the server does not send any
-packets with functionality beyond Version 3 because the client does
-not know how to interpret the newer packets.
-* Because the server side of a virtual
-channel protocol can be implemented as a separate process, it is
-easier to write code that interfaces with the Citrix-provided virtual
-channel support on the server than on the client (where the code must
-fit into an existing code structure). The server side of a virtual
-channel simply opens the channel, reads from and writes to it, and
-closes it when done.
-Writing code for the server-side is similar to writing an application,
-which uses services exported by the system. It is easier to write an
-application to handle the virtual channel communication because it can
-then be run once for each ICA connection supporting the virtual
-channel.
-Writing for the client-side is similar to writing a driver, which must
-provide services to the system in addition to using system services.
-If a service is written, it must manage multiple connections.
-* If you are designing new hardware for
-use with new virtual channels (for example, an improved compressed
-video format), make sure the hardware can be detected so that the
-client can determine whether or not it is installed. Then the client
-can communicate to the server if the hardware is available before the
-server uses the new data format. Optionally, you could have the
-virtual driver translate the new data format for use with older
-hardware.
-* There might be limitations preventing
-your new virtual channel from performing at an optimum level. If the
-client is connecting to the server running XenApp through a modem or
-serial connection, the bandwidth might not be great enough to properly
-support audio or video data. You can make your protocol adaptive, so
-that as bandwidth decreases, performance degrades gracefully, possibly
-by sending sound normally but reducing the frame rate of the video to
-fit the available bandwidth.
-* To identify where problems are
-occurring (connection, implementation, or protocol), first get the
-connection and communication working. Then, after the virtual channel
-is complete and debugged, do some time trials and record the results.
-These results establish a baseline for measuring further optimizations
-such as compression and other enhancements so that the channel
-requires less bandwidth.
-* The time stamp in the pVdPoll variable
-can be helpful for resolving timing issues in your virtual driver. It
-is a ULONG containing the current time in milliseconds. The pVdPoll
-variable is a pointer to a DLLPOLL structure. See Dllapi.h (in
+-  When you design your own virtual channel protocol, allow for the flexibility to add features. Virtual channels have version numbers that are exchanged during initialization so that both the client and the server detect the maximum level of functionality that can be used.
+
+For example, if the client is at
+Version 3 and the server is at Version 5, the server does not send any packets with functionality beyond Version 3 because the client does not know how to interpret the newer packets.
+
+-  Because the server side of a virtual channel protocol can be implemented as a separate process, it is easier to write code that interfaces with the Citrix-provided virtual channel support on the server than on the client (where the code must fit into an existing code structure). The server side of a virtual channel simply opens the channel, reads from and writes to it, and closes it when done. Writing code for the server-side is similar to writing an application, which uses services exported by the system. It is easier to write an application to handle the virtual channel communication because it can then be run once for each ICA connection supporting the virtual channel.
+
+Writing for the client-side is similar to writing a driver, which must provide services to the system in addition to using system services. If a service is written, it must manage multiple connections.
+
+-  If you are designing new hardware for use with new virtual channels (for example, an improved compressed video format), make sure the hardware can be detected so that the client can determine whether or not it is installed.
+
+Then the client can communicate to the server if the hardware is available before the server uses the new data format. Optionally, you could have the virtual driver translate the new data format for use with older hardware.
+
+-  There might be limitations preventing your new virtual channel from performing at an optimum level. If the client is connecting to the server running XenApp through a modem or serial connection, the bandwidth might not be great enough to properly support audio or video data. You can make your protocol adaptive, so that as bandwidth decreases, performance degrades gracefully, possibly by sending sound normally but reducing the frame rate of the video to fit the available bandwidth.
+
+-  To identify where problems are occurring (connection, implementation, or protocol), first get the connection and communication working. Then, after the virtual channel is complete and debugged, do some time trials and record the results.These results establish a baseline for measuring further optimizations such as compression and other enhancements so that the channel requires less bandwidth.
+
+-  The time stamp in the pVdPoll variable can be helpful for resolving timing issues in your virtual driver. It is a ULONG containing the current time in milliseconds. The pVdPoll variable is a pointer to a DLLPOLL structure. See Dllapi.h (in
 src/inc/) for definitions of these structures.
-
 
 ## Server-Side Functions Overview
 
@@ -87,12 +52,13 @@ have access to Windef.h, add the following to a header file for your
 project:
 
 ```
-#ifndef	IN
+#ifndef IN
 #define IN
 #endif
-#ifndef	OUT
+#ifndef OUT
 #endif
 ```
+
 | Function | Description|
 |----------|------------|
 |WFVirtualChannelClose | Closes an open virtual channel handle. |
@@ -102,7 +68,6 @@ project:
 |WFVirtualChannelQuery |Returns data related to a virtual channel. |
 |WFVirtualChannelRead  | Reads data from a virtual channel.|
 |WFVirtualChannelWrite | Writes data to a virtual channel.|
- 
 
 ## Client-Side Functions Overview
 
@@ -135,15 +100,12 @@ Vdapi.lib (provided with this SDK).
 |DriverSetInformation|Sets run-time information in the virtual driver.|
 |ICADataArrival|Indicates that data was delivered. Called when data arrives on the virtual channel.|
 
-
-
 ### Virtual Driver Helper Functions
 
 The virtual driver uses helper functions to send data and manage the
 virtual channel. When the WinStation driver initializes the virtual
 driver, the WinStation driver passes pointers to the helper functions
 and the virtual driver passes pointers to the user-defined functions.
-
 
 VdCallWd is linked in as part of VDAPI and is available in all
 user-implemented functions. The others are obtained during DriverOpen
@@ -160,7 +122,6 @@ retry the send operation on the next DriverPoll.
 |SendData|To send a packet of channel protocol to the server, with a notification option.|
 |QueueVirtualWrite|To send a packet of channel protocol to the server. This is a legacy function. Use SendData above for new virtual drivers.|
 |VdCallWd|Used to query and set information from the WinStation driver (WD).|
-
 
 ### Memory INI Functions
 
@@ -193,4 +154,3 @@ $ICAROOT/config directory.
 |miGetPrivateProfileInt |Returns an integer value. |
 | miGetPrivateProfileLong| Returns a long value.|
 |miGetPrivateProfileString| Returns a string value.|
-

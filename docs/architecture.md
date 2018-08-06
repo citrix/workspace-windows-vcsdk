@@ -6,9 +6,9 @@ packet data between a server running the Citrix component and a client
 device. Developers can use virtual channels to add functionality to
 clients. Uses for virtual channels include:
 
-* Support for administrative functions 
-* New data streams (audio and video)
-* New devices, such as scanners, card readers, and joysticks)
+*  Support for administrative functions
+*  New data streams (audio and video)
+*  New devices, such as scanners, card readers, and joysticks)
 
 ## Virtual Channel Overview
 
@@ -17,21 +17,20 @@ exchange of generalized packet data between a client and a server
 running Citrix XenApp or XenDesktop. Each implementation of an ICA
 virtual channel consists of two components:
 
-* Server-side portion on the computer running XenApp or XenDesktop
+*  Server-side portion on the computer running XenApp or XenDesktop
 
-	The virtual channel on the server side is a normal Win32 process; it can
+ The virtual channel on the server side is a normal Win32 process; it can
 be either an application or a Windows NT service.
 
-* Client- side portion on the client device
+*  Client- side portion on the client device
 
-	The client-side virtual channel driver is a dynamically loadable module
+ The client-side virtual channel driver is a dynamically loadable module
 (.DLL) that executes in the context of the client. You must write your
 virtual driver.
 
 This figure illustrates the virtual channel client-server connection:
 
-![](./virtual-channel-overview.png)
-
+![alt_text!](./virtual-channel-overview.png)
 
 The WinStation driver is responsible for demultiplexing the virtual
 channel data from the ICA data stream and routing it to the correct
@@ -40,7 +39,6 @@ driver is also responsible for gathering and sending virtual channel
 data to the server over the ICA connection. On the client side, the
 WinStation driver is also called the client engine, or simply the
 engine.
-
 
 The following is an overview of client-server data exchange using a
 virtual channel:
@@ -55,11 +53,12 @@ virtual channel:
 
 3.  The client-side virtual driver and server-side application pass data
     using the following two methods:
-    * If the server application has data to send to the client, the data is sent to the client immediately. When the client receives the data, the WinStation driver demultiplexes the
-virtual channel data from the ICA stream and passes it immediately to the client virtual driver.
-	* If the client virtual driver has data to send to the server, the data may be sent immediately, or it may be sent the next time the WinStation driver polls the virtual driver. When the data is received by the server, it is queued until the virtual channel application reads it. There is no way to alert the server virtual channel application that data was received.
 
-4.  When the server virtual channel application is finished, it closes
+*  If the server application has data to send to the client, the data is sent to the client immediately. When the client receives the data, the WinStation driver demultiplexes the virtual channel data from the ICA stream and passes it immediately to the client virtual driver.
+
+*  If the client virtual driver has data to send to the server, the data may be sent immediately, or it may be sent the next time the WinStation driver polls the virtual driver. When the data is received by the server, it is queued until the virtual channel application reads it. There is no way to alert the server virtual channel application that data was received.
+
+1.  When the server virtual channel application is finished, it closes
     the virtual channel and frees any allocated resources.
 
 ## ICA and Virtual Channel Data Packets
@@ -104,8 +103,8 @@ amount of data at any one time. See Flow Control for more information.
 
 Client virtual drivers may elect to send data in either of two modes:
 
-* Polling mode
-* Immediate mode
+*  Polling mode
+*  Immediate mode
 
 If operating in the polling mode, the WinStation driver polls each
 virtual driver regularly by calling its DriverPoll function. When
@@ -190,7 +189,7 @@ a later DriverPoll.
 
 ## Module.ini
 
-The Receivers use settings stored in Module.ini to determine which
+The Citrix Workspace app for Windows use settings stored in Module.ini to determine which
 virtual channels to load. Driver developers can also use Module.ini to
 store parameters for virtual channels. Module.ini changes are effective
 only before the installation. After the installation, you must modify
@@ -268,7 +267,7 @@ the entire packet.
 
 These APIs allow creating solutions that synchronize the visual aspects
 of an application that runs on a host (XenApp or XenDesktop) with
-corresponding visual elements that are running on Citrix Receiver for
+corresponding visual elements that are running on Citrix Workspace app for Windows for
 Windows. The APIs consist of two different parts: client-side and
 host-side. The client- side component exposes previously unavailable
 functionality to third parties. This includes getting information about
@@ -281,12 +280,9 @@ calls.
 
 The APIs provide the following features:
 
-* Allow efficient tracking of windows on a host through the WinFrame
-API.
-* Provide methods for synchronizing with the client desktop display with
-the Virtual Channel SDK.
-* Provide an improved visual experience and
-support to third-party applications for better ICA integration.
+*  Allow efficient tracking of windows on a host through the WinFrame API.
+*  Provide methods for synchronizing with the client desktop display with the Virtual Channel SDK.
+*  Provide an improved visual experience and support to third-party applications for better ICA integration.
 
 ### Getting started
 
@@ -299,7 +295,7 @@ Libraries: wdica30.lib
 The APIs provide two distinct components with their own architectures:
 host-side and client- side. The host component is part of the WinFrame
 API, and provides updates on tracked windows. You can then communicate
-this data to Citrix Receiver for Windows so as to synchronize window
+this data to Citrix Workspace app for Windows so as to synchronize window
 positions. The client - side component in the Virtual Channel SDK then
 allows third parties to synchronize with the ICA window. It provides
 them with information about the ICA window's dimensions and handle, as
@@ -324,22 +320,41 @@ and offset (for example, panning), as well as its current mode (for
 example, scaling, panning, seamless).
 
 ```
-WDQUERYINFORMATION wdQueryInfo; UINT16 uiSize;int rc;WDICAWINDOWINFO infoParam; 
-wdQueryInfo.WdInformationClass = WdGetICAWindowInfo; 
-wdQueryInfo.pWdInformation = &infoParam; 
+WDQUERYINFORMATION wdQueryInfo; UINT16 uiSize;
+int rc;
+WDICAWINDOWINFO infoParam;
+wdQueryInfo.WdInformationClass = WdGetICAWindowInfo;
+wdQueryInfo.pWdInformation = &infoParam;
 wdQueryInfo.WdInformationLength = sizeof(infoParam);
-uiSize = sizeof(wdQueryInfo);rc = VdCallWd(g_pVd, WDxQUERYINFORMATION, &wdQueryInfo, &uiSize);if(CLIENT_STATUS_SUCCESS == rc){	// Successfully populated infoParam with ICA window	// information}
+uiSize = sizeof(wdQueryInfo);
+rc = VdCallWd(g_pVd, WDxQUERYINFORMATION, &wdQueryInfo, &uiSize);
+
+if(CLIENT_STATUS_SUCCESS == rc)
+{
+ // Successfully populated infoParam with ICA window
+ // information
+}
 ```
+
 #### Get corresponding client window
 
 This sample shows how to get the corresponding client window for a given server window.
 
 ```
-WDQUERYINFORMATION wdQueryInfo; UINT16 uiSize;int rc;HWND window = 0x42; // example server window handle
-wdQueryInfo.WdInformationClass = WdGetClientWindowFromServerWindow; 
-wdQueryInfo.pWdInformation = &window; 
-wdQueryInfo.WdInformationLength = sizeof(window); 
-uiSize = sizeof(wdQueryInfo);rc = VdCallWd(g_pVd, WDxQUERYINFORMATION, &wdQueryInfo, &uiSize);if(CLIENT_STATUS_SUCCESS == rc){	// Success, pWdInformation now points to the	//corresponding client window hwnd.}
+WDQUERYINFORMATION wdQueryInfo; UINT16 uiSize;
+int rc;
+HWND window = 0x42; // example server window handle
+wdQueryInfo.WdInformationClass = WdGetClientWindowFromServerWindow;
+wdQueryInfo.pWdInformation = &window;
+wdQueryInfo.WdInformationLength = sizeof(window);
+uiSize = sizeof(wdQueryInfo);
+rc = VdCallWd(g_pVd, WDxQUERYINFORMATION, &wdQueryInfo, &uiSize);
+
+if(CLIENT_STATUS_SUCCESS == rc)
+{
+ // Success, pWdInformation now points to the
+//corresponding client window hwnd.
+}
 ```
 
 #### Register ICA Window callback
@@ -352,16 +367,33 @@ about the ICA window is then gathered using WdGetICAWindowInfo
 information class, as demonstrated in the first sample.
 
 ```
-WDQUERYINFORMATION wdQueryInfo; UINT16 uiSize;int rc;WDREGISTERWINDOWCALLBACKPARAMS callbackParams;callbackParams.pfnCallback = &Foo; // Your callback function wdQueryInfo.WdInformationClass = WdRegisterWindowChangeCallback;wdQueryInfo.pWdInformation = &callbackParams;wdQueryInfo.WdInformationLength = sizeof(callbackParams); 
-uiSize = sizeof(wdQueryInfo); 
-rc = VdCallWd(g_pVd, WDxQUERYINFORMATION, &wdQueryInfo, &uiSize); 
-if(CLIENT_STATUS_SUCCESS == rc) {// Callback successfully registered.// Function Foo will be called whenever the ICA window// mode, position, or size changes.}
+WDQUERYINFORMATION wdQueryInfo; UINT16 uiSize;
+int rc;
+WDREGISTERWINDOWCALLBACKPARAMS callbackParams;
+callbackParams.pfnCallback = &Foo; // Your callback function wdQueryInfo.WdInformationClass = WdRegisterWindowChangeCallback;
+wdQueryInfo.pWdInformation = &callbackParams;
+wdQueryInfo.WdInformationLength = sizeof(callbackParams);
+uiSize = sizeof(wdQueryInfo);
+rc = VdCallWd(g_pVd, WDxQUERYINFORMATION, &wdQueryInfo, &uiSize);
+if(CLIENT_STATUS_SUCCESS == rc) {
+// Callback successfully registered.
+// Function Foo will be called whenever the ICA window
+// mode, position, or size changes.
+}
 ```
 
 #### Unregister ICA Window callback
 
 ```
-WDQUERYINFORMATION wdQueryInfo; UINT16 uiSize;int rc;wdQueryInfo.WdInformationClass = WdUnregisterWindowChangeCallback wdQueryInfo.pWdInformation = &callbackParams.Handle;// Previously returned handle wdQueryInfo.WdInformationLength = sizeof(callbackParams.Handle);uiSize = sizeof(wdQueryInfo);rc = VdCallWd(g_pVd, WDxQUERYINFORMATION, &wdQueryInfo, &uiSize); if(CLIENT_STATUS_SUCCESS == rc){// Callback successfully unregistered}
+WDQUERYINFORMATION wdQueryInfo; UINT16 uiSize;
+int rc;
+wdQueryInfo.WdInformationClass = WdUnregisterWindowChangeCallback wdQueryInfo.pWdInformation = &callbackParams.Handle;
+// Previously returned handle wdQueryInfo.WdInformationLength = sizeof(callbackParams.Handle);
+uiSize = sizeof(wdQueryInfo);
+rc = VdCallWd(g_pVd, WDxQUERYINFORMATION, &wdQueryInfo, &uiSize); if(CLIENT_STATUS_SUCCESS == rc)
+{
+// Callback successfully unregistered
+}
 ```
 
 #### Programming guide
@@ -371,91 +403,103 @@ coordinate windows between the host and client desktop. In general, the
 host uses the WinFrame API component of the API to track windows of
 interest. The host listens on an assigned mail slot for tracking updates
 about its windows. These updates are then communicated to Citrix
-Receiver, where they are used to properly position corresponding
-windows. Citrix Receiver uses the client-side portion of the APIs in the
+Citrix Workspace app, where they are used to properly position corresponding
+windows. Citrix Workspace app uses the client-side portion of the APIs in the
 Virtual Channel SDK to synchronize its windows with the ICA window.
-Citrix Receiver can be notified when the ICA window changes, and thus
+Citrix Workspace app can be notified when the ICA window changes, and thus
 make any necessary changes to other third-party applications.
 
 #### Programming reference
 
 ##### Structures
 
-**WDQUERYINFORMATION**
+### WDQUERYINFORMATION
 
 Pre-existing structure passed to the WinStation driver's QueryInformation method. Stores input as well as resulting output.
 
 ```
-{WDINFOCLASS WdInformationClass; 
-LPVOID pWdInformation;USHORT WdInformationLength; 
-USHORT WdReturnLength;} WDQUERYINFORMATION, * PWDQUERYINFORMATION;```	
+{
+WDINFOCLASS WdInformationClass;
+LPVOID pWdInformation;
+USHORT WdInformationLength;
+USHORT WdReturnLength;
+} WDQUERYINFORMATION, * PWDQUERYINFORMATION;
+```
 
-* WdInformationonClass: Set to the enum value corresponding to the API function you want to call.
-* pWdInformation: Necessary input parameters, if any, for this function call. If the call returns anything, it is stored here as well.
-* WdInformationLength: Set to the size of the input to which pWdInformation point.
-* WdReturnLength: Filled in upon return; the size of the return value to which pWdInformation points.
+*  WdInformationonClass: Set to the enum value corresponding to the API function you want to call.
+*  pWdInformation: Necessary input parameters, if any, for this function call. If the call returns anything, it is stored here as well.
+*  WdInformationLength: Set to the size of the input to which pWdInformation point.
+*  WdReturnLength: Filled in upon return; the size of the return value to which pWdInformation points.
 
-**WDICAWINDOWINFO**
+### WDICAWINDOWINFO
 
 Struct passed as input when using the WdGetICAWindowInfo information
 class. Upon successful return, this is populated with information about
 the ICA window.
 
 ```
-typedef struct _WDICAWINDOWINFO{HWND hwnd; 
-WDICAWINDOWMODE mode;UINT32 xWinWidth, yWinHeight, xViewWidth, yViewHeight; 
-INT xViewOffset, yViewOffset;} WDICAWINDOWINFO, * PWDICAWINDOWINFO;```
+typedef struct _WDICAWINDOWINFO
+{
+HWND hwnd;
+WDICAWINDOWMODE mode;
+UINT32 xWinWidth, yWinHeight, xViewWidth, yViewHeight;
+INT xViewOffset, yViewOffset;
+} WDICAWINDOWINFO, * PWDICAWINDOWINFO;
+```
 
-* hwnd: ICA window handle.
-* mode: Current mode of the ICA window (for example, scaling, panning,
-seamless).
-* xWinWidth: Width of the ICA window.
-* yWinHeight: Height of the ICA window. 
-* xViewWidth: Width of the ICA window's view area. 
-* yViewHeight: Height of the ICA window's view area.
-* xViewOffset: How much the view area is offset in the x dimension (horizontal panning). 
-* yViewOffset: How much the view area is offset in the y dimension (vertical panning). 
+*  hwnd: ICA window handle.
+*  mode: Current mode of the ICA window (for example, scaling, panning,seamless).
+*  xWinWidth: Width of the ICA window.
+*  yWinHeight: Height of the ICA window.
+*  xViewWidth: Width of the ICA window's view area.
+*  yViewHeight: Height of the ICA window's view area.
+*  xViewOffset: How much the view area is offset in the x dimension (horizontal panning).
+*  yViewOffset: How much the view area is offset in the y dimension (vertical panning).
 
-**WDREGISTERWINDOWCALLBACKPARAMS**
+### WDREGISTERWINDOWCALLBACKPARAMS
 
 Struct passed as input when using the WdRegisterWindowChangeCallback information class.
 
 ```
-typedef struct _WDREGISTERWINDOWCALLBACKPARAMS 
-{ 
-	PFNWD_WINDOWCHANGED pfnCallback;	UINT32 Handle;} WDREGISTERWINDOWCALLBACKPARAMS,*PWDREGISTERWINDOWCALLBACKPARAMS;```
+typedef struct _WDREGISTERWINDOWCALLBACKPARAMS
+{
+ PFNWD_WINDOWCHANGED pfnCallback;
+ UINT32 Handle;
+} WDREGISTERWINDOWCALLBACKPARAMS,*PWDREGISTERWINDOWCALLBACKPARAMS;
+```
 
-* pfnCallback: The user defined function
-to be called when the ICA window changes (for example, its mode,
-dimensions, view). This function should have the following header,
-with the UINT parameter being the current mode of the ICA window (see
-WDICAWINDOWMODE): typedef VOID (cdecl * PFNWD_WINDOWCHANGED)
-(UINT32);
-* Handle: Upon successful return this handle is populated. It can later be used to identify the handle when unregistering the callback.
+*  pfnCallback: The user defined function to be called when the ICA window changes (for example, its mode, dimensions, view). This function should have the following header, with the UINT parameter being the current mode of the ICA window (see WDICAWINDOWMODE): typedef VOID (cdecl * PFNWD_WINDOWCHANGED) (UINT32);
 
+*  Handle: Upon successful return this handle is populated. It can later be used to identify the handle when unregistering the callback.
 
-##### Unions
+#### Unions
 
-**WDICAWINDOWMODE**
+### WDICAWINDOWMODE
 
 Union used to store the ICA window's current mode.
 
 ```
-typedef union _WDICAWINDOWMODE{struct {	UINT Reserved : 1; 
-	UINT Seamless : 1; 
-	UINT Panning : 1; 
-	UINT Scaling : 1;} Flags;	UINT Value;} WDICAWINDOWMODE;```
+typedef union _WDICAWINDOWMODE
+{
+struct {
+ UINT Reserved : 1;
+ UINT Seamless : 1;
+ UINT Panning : 1;
+ UINT Scaling : 1;
+} Flags;
+ UINT Value;
+} WDICAWINDOWMODE;
+```
 
-##### Enumerations
+### Enumerations
 
 The WDINFOCLASS enumeration has four values used by the Windows
 Monitoring API:
 
-* WdGetICAWindowInfo
-* WdGetClientWindowFromServerWindow
-* WdRegisterWindowChangeCallback
-* WdUnregisterWindowChangeCallback
-
+*  WdGetICAWindowInfo
+*  WdGetClientWindowFromServerWindow
+*  WdRegisterWindowChangeCallback
+*  WdUnregisterWindowChangeCallback
 
 ## Citrix Dynamic Virtual Channel Protocol
 
@@ -527,32 +571,21 @@ channel:
 
 Remarks:
 
-* Normally, DVC plug-ins are registered
-according to the requirements defined by Microsoft. Citrix provides
-additional DVC plug-in registration for two purposes:
+*  Normally, DVC plug-ins are registered according to the requirements defined by Microsoft. Citrix provides additional DVC plug-in registration for two purposes:
+*  Enumeration of known 3rd party plug-ins that are not properly registered and cannot be enumerated otherwise.
+*  Optional assignment by administrator of explicit SVC name per plug-in.
+*  If the SVC name is generated from a friendly name, as opposed to administrator-assigned, then accidental collision with other SVCs is avoided as follows:
+*  First the original name is truncated to 6 characters. Then a decimal digit is appended starting from 0 and up to 9 such that the new name is unique. If the name still is not unique, then step b is performed.
+*  First the original name is truncated to 5 characters. Then two decimal digits are appended starting from 0 and up to 99 such that the new name is unique.
 
-	* Enumeration of known 3rd party plug-ins that are not properly
-    registered and cannot be enumerated otherwise.
-	* Optional assignment by administrator of explicit SVC name per
-plug-in.
-* If the SVC name is generated from a
-friendly name, as opposed to administrator-assigned, then accidental
-collision with other SVCs is avoided as follows:
-	* First the original name is truncated to 6 characters. Then a decimal
-    digit is appended starting from 0 and up to 9 such that the new
-    name is unique. If the name still is not unique, then step b
-    is performed.
-* First the original name is truncated to 5 characters. Then two
-    decimal digits are appended starting from 0 and up to 99 such that
-    the new name is unique.
+*  Name collision may occur with both SVCs used for DVC and other standard Citrix or 3rd party SVCs. The range from 0 to 99 used to create unique SVC names is sufficient, since currently ICA support only up to 64 SVCs.
 
-* Name collision may occur with both SVCs used for DVC and other standard Citrix or 3rd party SVCs. The range from 0 to 99 used to create unique SVC names is sufficient, since currently ICA support only up to 64 SVCs.* The Client DVC Manager registers N number of SVCs with the WD in DriverOpen. In general, this will be 1 SVC per DVC Plug-in enumerated. However, plug-ins may share the same SVC name if:	* The administrator has explicitly assigned the same SVC name for more than one DVC Plug in via the Citrix ICA Client DVC Registration.	* There are no more SVCs available.
-* In the future the Client DVC Manager
-might assign and load a separate SVC per DVC listener (as opposed to
-plug-in). Currently, this is not possible because new listeners may
-become available at any point after loading of a plug-in and the
-current ICA architecture does not allow dynamic loading of SVCs at the
-client. All SVCs are loaded during the ICA handshake.
+*  The Client DVC Manager registers N number of SVCs with the WD in DriverOpen. In general, this will be 1 SVC per DVC Plug-in enumerated. However, plug-ins may share the same SVC name if:
+
+*  The administrator has explicitly assigned the same SVC name for more than one DVC Plug in via the Citrix ICA Client DVC Registration.
+
+*  There are no more SVCs available.
+*  In the future the Client DVC Manager might assign and load a separate SVC per DVC listener (as opposed to plug-in). Currently, this is not possible because new listeners may become available at any point after loading of a plug-in and the current ICA architecture does not allow dynamic loading of SVCs at the client. All SVCs are loaded during the ICA handshake.
 
 &#50;.  The host DVC Manager opens a SVC for each channel name received from
     the client via the CAPABILITY_DYNAMIC_VIRTUAL_CHANNEL
@@ -574,10 +607,10 @@ client. All SVCs are loaded during the ICA handshake.
     available listeners hosted by the DVC Plug-in. Each list is sent
     over the respective SVC:
 
-   *  Immediately after the DVC capabilities are committed by
+*  Immediately after the DVC capabilities are committed by
         the host.
 
-   *  And at any point a new listener starts or an existing listener
+*  And at any point a new listener starts or an existing listener
         shuts down.
 
 Remarks: Although it is theoretically possible for a listener to shut
@@ -615,7 +648,6 @@ down until the whole DVC plug-in shuts down
     unloads all the DVC Plug-ins, which in turn shut down
     their listeners.
 
-
 ### Naming static virtual channel
 
 The Channel Name field provides a name for the static virtual channel
@@ -650,11 +682,9 @@ INI Location:
 
   ---------------------- -------------------------------------------- --------- ---------
   INI File             Section                                              Value
-                                                                      
-  Module.ini           \[DVC_Plugin_&lt;DVC plugin name&gt;\]   
-                                                                                
-  Registry Location:                                                          
-                                                                      
+
+  Module.ini           \[DVC_Plugin_&lt;DVC plugin name&gt;\
+  Registry Location:
   Registry Key                                                      Value
   ---------------------- -------------------------------------------- --------- ---------
 
@@ -665,10 +695,6 @@ plugin name&gt;
 The static virtual channel name can be modified using the above
 locations if the administrator wants to give the explicit name.
 >
-Page 19 of 63
-
-<span id="page21" class="anchor"></span>Copyright © Citrix Systems, Inc.
-All Rights Reserved.
 
 ### Steps to write DVC component over ICA
 
@@ -684,4 +710,3 @@ and
 [*http://msdn.microsoft.com/en-us/library/bb540854(VS.85).aspx*](http://msdn.microsoft.com/en-us/library/bb540854(VS.85).aspx)
 
 respectively.
-

@@ -2,9 +2,8 @@
 
 For function summaries , see:
 
-* Server-Side Functions Overview
-* Client-Side Functions Overview
-
+-  Server-Side Functions Overview
+-  Client-Side Functions Overview
 
 ## DriverClose
 
@@ -15,7 +14,10 @@ virtual driver, when the ICA connection is being terminated.
 
 ```
 INT Driverclose
-	( PVD pVD,	PDLLCLOSE pVdClose, 	PUINT16 puiSize);```
+ ( PVD pVD,
+ PDLLCLOSE pVdClose,
+ PUINT16 puiSize);
+```
 
 ### Parameters
 
@@ -24,7 +26,6 @@ INT Driverclose
 | pVD | Pointer to a virtual driver control structure. |
 | pVdClose | Pointer to a standard driver close information structure. |
 | puiSize | Pointer to the size of the driver close information structure. This is an input parameter. |
-
 
 ### Return Values
 
@@ -43,32 +44,32 @@ hooks.
 The pVdClose structure currently contains one element – NotUsed. This
 structure can be ignored.
 
-
 ## DriverGetLastError
 
 This function is not used but is available for linking with the common
-front end, VDAPI. 
+front end, VDAPI.
 
 ### Calling Convention
+
 ```
 INT DriverGetLastError(
 PVD pVD,
 PVDLASSTERROR pVdLastError);
 ```
 
-### Parameters 
+### Parameters
 
 | Parameter | Description |
 |-----------|-------------|
 | pVD | Pointer to a virtual driver control structure. |
 | pVdLast Error | Pointer to a structure that receives the last error information.|
-  
 
 ### Return Value
 
-The driver returns CLIENT_STATUS_SUCCESS. 
+The driver returns CLIENT_STATUS_SUCCESS.
 
 ### Remarks
+
 This function currently has no practical significance for virtual
 drivers; it is provided for compatibility with the loadable module
 interface.
@@ -79,6 +80,7 @@ Gets information about the virtual driver, such as the version level of
 the driver.
 
 ### Calling Convention
+
 ```
 INT DriverInfo(
 PVD pVD,
@@ -151,11 +153,10 @@ in this buffer.
 The parameter puiSize must be initialized to the size of the driver
 information structure.
 
-
 ## DriverOpen
 
 Initializes the virtual driver. The client engine calls this
-user-written function once when the client is loaded. 
+user-written function once when the client is loaded.
 
 ### Calling Convention
 
@@ -187,19 +188,23 @@ The code fragments in this section are taken from the vdping example.
 
 The DriverOpen function must:
 
-1. Allocate a virtual channel.
-Fill in a WDQUERYINFORMATION structure and call VdCallWd. The
-WinStation driver fills in the OpenVirtualChannel structure (including
-the channel number) and the data in pVd.
+1.  Allocate a virtual channel.Fill in a WDQUERYINFORMATION structure and call VdCallWd. The WinStation driver fills in the OpenVirtualChannel structure (including the channel number) and the data in pVd.
 
 ```
-WDQUERYINFORMATION wdqi;OPENVIRTUALCHANNEL OpenVirtualChannel;wdqi.WdInformationClass = WdOpenVirtualChannel; wdqi.pWdInformation = &OpenVirtualChannel;wdqi.WdInformationLength = sizeof(OPENVIRTUALCHANNEL); OpenVirtualChannel.pVCName = CTXPING_VIRTUAL_CHANNEL_NAME; rc = VdCallWd(pVd, WDxQUERYINFORMATION, &wdqi);/* do error processing here */```
+WDQUERYINFORMATION wdqi;
+OPENVIRTUALCHANNEL OpenVirtualChannel;
+wdqi.WdInformationClass = WdOpenVirtualChannel; wdqi.pWdInformation = &OpenVirtualChannel;
+wdqi.WdInformationLength = sizeof(OPENVIRTUALCHANNEL); OpenVirtualChannel.pVCName = CTXPING_VIRTUAL_CHANNEL_NAME; rc = VdCallWd(pVd, WDxQUERYINFORMATION, &wdqi);
+/* do error processing here */
+```
+
 After the call to VdCallWd, the channel number is assigned in the
 OpenVirtualChannel structure's Channel element. Save the channel
 number and set the channel mask to indicate which channel this driver
 will handle.
 
 For example:
+
 ```
 g_usVirtualChannelNum = OpenVirtualChannel.Channel;
 pVdOpen-&gt;ChannelMask = (1L &lt;&lt; OpenVirtualChannel-&gt;);
@@ -210,7 +215,9 @@ pVdOpen-&gt;ChannelMask = (1L &lt;&lt; OpenVirtualChannel-&gt;);
 If you want the virtual driver to allocate memory for state data, it can
 have a pointer to this data returned on each call by placing the pointer
 in the virtual driver structure, as follows:
+
 ```
+
 pVd->pPrivate = pMyStructure;
 ```
 
@@ -224,15 +231,22 @@ output buffers and sends data to the WinStation driver for transmission
 to the server.
 
 ```
-WDSETINFORMATION wdsi; 
-VDWRITEHOOK vdwh;// Fill in a write hook structure 
-vdwh.Type = g_usVirtualChannelNum; vdwh.pVdData = pVd;vdwh.pProc = (PVDWRITEPROCEDURE) ICADataArrival;
-// Fill in a set information structure 
-wdsi.WdInformationClass = WdVirtualWriteHook; 
-wdsi.pWdInformation = &vdwh; 
-wdsi.WdInformationLength = sizeof(VDWRITEHOOK); 
-rc = VdCallWd( pVd, WDxSETINFORMATION, &wdsi);/* do error processing here */```
+WDSETINFORMATION wdsi; \]
+VDWRITEHOOK vdwh;
 
+// Fill in a write hook structure
+
+vdwh.Type = g_usVirtualChannelNum;
+vdwh.pVdData = pVd;
+vdwh.pProc = (PVDWRITEPROCEDURE) ICADataArrival;
+
+// Fill in a set information structure
+wdsi.WdInformationClass = WdVirtualWriteHook;
+wdsi.pWdInformation = &vdwh;
+wdsi.WdInformationLength = sizeof(VDWRITEHOOK);
+rc = VdCallWd( pVd, WDxSETINFORMATION, &wdsi);
+/* do error processing here */
+```
 
 During the registration of the write hook, the WinStation driver passes
 entry points for the output buffer virtual driver helper functions to
@@ -244,11 +258,15 @@ WinStation driver data area, which the DriverOpen function also saves
 functions).
 
 ```
-// Record pointers to functions used// for sending data to the host. 
-pWd = vdwh.pWdData;pOutBufReserve = vdwh.pOutBufReserveProc; 
-pOutBufAppend = vdwh.pOutBufAppenProc; 
-pOutBufWrite = vdwh.pOutBufWriteProc; 
-pAppendVdHeader = vdwh.pAppendVdHeaderProc;```
+// Record pointers to functions used
+// for sending data to the host.
+pWd = vdwh.pWdData;
+pOutBufReserve = vdwh.pOutBufReserveProc;
+pOutBufAppend = vdwh.pOutBufAppenProc;
+pOutBufWrite = vdwh.pOutBufWriteProc;
+pAppendVdHeader = vdwh.pAppendVdHeaderProc;
+```
+
 &#52;. Determine the version of the WinStation driver.
 
 New virtual drivers should determine whether the WinStation driver
@@ -256,7 +274,7 @@ supports the new SendData API and “no polling” mode. Use the WdVirtualWriteH
 
 ```
 // Do extra initialization to determine if
-// we are talking to an HPC client. 
+// we are talking to an HPC client.
 wdsi.WdInformationClass = WdVirtualWriteHookEx;
 wdsi.pWdInformation = &vdwhex;
 wdsi.WdInformationLength = sizeof(VDWRITEHOOKEX);
@@ -268,13 +286,13 @@ vdwhex.usVersion = HPC_VD_API_VERSION_LEGACY;
 rc = VdCallWd(pVd, WDxQUERYINFORMATION, &wdsi, &uiSize);
 if (CLIENT_STATUS_SUCCESS != rc)
 {
-	return(rc);
+ return(rc);
 }
 g_fIsHpc = (HPC_VD_API_VERSION_LEGACY != vdwhex.usVersion);
 
 // If version returned, this is HPC or later
-g_pSendData = vdwhex.pSendDataProc; 	// save HPC SendData
-									  	// API address
+g_pSendData = vdwhex.pSendDataProc;  // save HPC SendData
+ // API address
 ```
 
 The usVersion that is returned may be one of the following values:
@@ -282,11 +300,10 @@ The usVersion that is returned may be one of the following values:
 ```
 typedef enum _HPC_VD_API_VERSION
 {
-	HPC_VD_API_VERSION_LEGACY = 0, 			// legacy VDs
-	HPC_VD_API_VERSION_V1 = 	 1, 		// VcSDK API version 1
+ HPC_VD_API_VERSION_LEGACY = 0,  // legacy VDs
+ HPC_VD_API_VERSION_V1 =   1, // VcSDK API version 1
 } HPC VD API VERSION;
 ```
-
 
 If the usVersion returned is HPC_VD_API_VERSION_LEGACY, the engine
 is an earlier engine. Any other value indicates the newer engine. The
@@ -307,18 +324,18 @@ API options this driver will use:
 ```
 if(g_fIsHpc)
 {
-	WDSET_HPC_PROPERITES hpcProperties;
-	hpcProperties.usVersion = HPC_VD_API_VERSION_V1;
-	hpcProperties.pWdData = g_pWd; 
-	hpcProperties.ulVdOptions = HPC_VD_OPTIONS_NO_POLLING; 
-	wdsi.WdInformationClass = WdHpcProperties; 
-	wdsi.pWdInformation = &hpcProperties;
-	wdsi.WdInformationLength = sizeof(WDSET_HPC_PROPERITES); 
-	rc = VdCallWd(pVd, WDxSETINFORMATION, &wdsi, &uiSize);
-	if(CLIENT_STATUS_SUCCESS != rc)
-	{
-		return(rc);
-	}
+ WDSET_HPC_PROPERITES hpcProperties;
+ hpcProperties.usVersion = HPC_VD_API_VERSION_V1;
+ hpcProperties.pWdData = g_pWd;
+ hpcProperties.ulVdOptions = HPC_VD_OPTIONS_NO_POLLING;
+ wdsi.WdInformationClass = WdHpcProperties;
+ wdsi.pWdInformation = &hpcProperties;
+ wdsi.WdInformationLength = sizeof(WDSET_HPC_PROPERITES);
+ rc = VdCallWd(pVd, WDxSETINFORMATION, &wdsi, &uiSize);
+ if(CLIENT_STATUS_SUCCESS != rc)
+ {
+ eturn(rc);
+ }
 }
 ```
 
@@ -337,13 +354,13 @@ definitions:
 ```
 typedef enum _HPC_VD_OPTIONS
 {
-	HPC_VD_OPTIONS_NO_POLLING =0x0001, 	// Flag indicating that 
-											//channels on this VD do not
-											// require send data polling 
-	HPC_VD_OPTIONS_NO_COMPRESSION =0x0002		// Flag indicating
-												// that channels on this VD 
-												// send data that does not 
-												// need reducer compression
+ HPC_VD_OPTIONS_NO_POLLING =0x0001,  // Flag indicating that
+ //channels on this VD do not
+ // require send data polling
+ HPC_VD_OPTIONS_NO_COMPRESSION =0x0002  // Flag indicating
+ // that channels on this VD
+ // send data that does not
+ // need reducer compression
 } HPC_VD_OPTIONS;
 ```
 
@@ -353,21 +370,20 @@ typedef enum _HPC_VD_OPTIONS
     is returned.
 
 !!!tip "Note"
-		vdwh.MaximumWriteSize is one byte greater than the actual
+ vdwh.MaximumWriteSize is one byte greater than the actual
 maximum that you can use because it also includes the channel number.
 
 ```
-g_usMaxDataSize = vdwh.MaxiumWriteSize - 1; 
+g_usMaxDataSize = vdwh.MaxiumWriteSize - 1;
 if(NULL == (pMyData = malloc( g_usMaxDataSize )))
 {
-	return(CLIENT_ERROR_NO_MEMORY);
+ return(CLIENT_ERROR_NO_MEMORY);
 }
 ```
 
 &#55;  Return the size of the VDOPEN structure in `puiSize`. This is used
     by the client engine to determine the version of the virtual
     channel driver.
-
 
 ## DriverPoll
 
@@ -377,6 +393,7 @@ processing. This function may be called on a regular basis by the main
 clie nt poll loop.
 
 ### Calling Convention
+
 ```
 INT DriverPoll(
 PVD pVD,
@@ -391,7 +408,6 @@ PUINT16 puiSize);
 | pVD | Pointer to a virtual driver control structure.|
 | pVdPoll | Pointer to one of the driver poll information structures (DLLPOLL). |
 | puiSize | Pointer to the size of the driver poll information structure. This is an output parameter. |
-
 
 ### Return Values
 
@@ -427,7 +443,6 @@ virtual driver has more data to send.
 Return values that begin with CLIENT_ERROR_\* are fatal errors; the
 ICA session will be disconnected.
 
-
 ### Remarks
 
 A virtual driver is not allowed to block while waiting for a desired
@@ -441,6 +456,7 @@ Driver Poll.
 Gets run-time information from the virtual driver.
 
 ### Calling Convention
+
 ```
 INT DriverQueryInformation(
 PVD pVD,
@@ -458,7 +474,7 @@ PUINT16 puiSize);
 
 ### Return Value
 
-The function returns CLIENT_STATUS_SUCCESS. 
+The function returns CLIENT_STATUS_SUCCESS.
 
 ### Remarks
 
@@ -484,22 +500,21 @@ PUINT16 puiSize);
 ### Parameters
 
 | Parameter        | Description |
-|------------------|-------------|
-| pVD 		| Pointer to a virtual driver control structure.|
+|:------------------:|:-------------:|
+| pVD  | Pointer to a virtual driver control structure.|
 | pVdSet Information | Pointer to a structure that specifies the information class, a pointer to any additional data, and the size in bytes of the additional data (if any).|
 | puiSize | Pointer to the size of the information structure. This is an input parameter. |
 
-
 ### Return Value
 
-The function returns CLIENT_STATUS_SUCCESS. 
+The function returns CLIENT_STATUS_SUCCESS.
 
 ### Remarks
 
 This function can receive two information classes:
 
-* VdDisableModule: When the connection is being closed.
-* VdFlush: When WFPurgeInput or WFPurgeOutput is called by the server-side virtual channel application. The VdSetInformation structure contains a pointer to a VDFLUSH structure that specifies which purge function was called.
+-  VdDisableModule: When the connection is being closed.
+-  VdFlush: When WFPurgeInput or WFPurgeOutput is called by the server-side virtual channel application. The VdSetInformation structure contains a pointer to a VDFLUSH structure that specifies which purge function was called.
 
 ## SendData
 
@@ -510,8 +525,8 @@ option.
 
 ```
 INT WFCAPI SendData(DWORD pWd, USHORT usChannel,
-						LPBYTE pData,USHORT usLen,
-						LPVOID pUserData, UINT32 uiFlags);
+ LPBYTE pData,USHORT usLen,
+ LPVOID pUserData, UINT32 uiFlags);
 ```
 
 ### Parameters
@@ -527,41 +542,34 @@ INT WFCAPI SendData(DWORD pWd, USHORT usChannel,
 
 Currently there is only one flag defined. See the SENDDATA_\* enum:
 
-* SENDDATA_NOTIFY: If this flag is set,
-and when the SendData return code is CLIENT_ERROR_NO_OUTBUF
-indicating that the engine had no buffers to accommodate the outbound
-packet, the engine will notify the virtual driver later when it can
-retry the send operation. The notification occurs via the DriverPoll
-method.
+-  SENDDATA_NOTIFY: If this flag is set,and when the SendData return code is CLIENT_ERROR_NO_OUTBUF indicating that the engine had no buffers to accommodate the outbound packet, the engine will notify the virtual driver later when it can retry the send operation. The notification occurs via the DriverPoll method.
 
 ### Return Value
 
 The SendData function will return one of the following values:
 
-* CLIENT_STATUS_SUCCESS:
-	* The data was copied into virtual write buffers.
-	* The user's buffer is free.
-	* No callback will occur, even if the SENDDATA_NOTIFY flag is set.
-	* The next SendData call can be issued immediately.
-* CLIENT_ERROR_NO_OUTBUF:
-	* The virtual write could not be scheduled (out of
+-  CLIENT_STATUS_SUCCESS:
+    -  The data was copied into virtual write buffers.
+    -  The user's buffer is free.
+    -  No callback will occur, even if the SENDDATA_NOTIFY flag is set.
+    -  The next SendData call can be issued immediately.
+-  CLIENT_ERROR_NO_OUTBUF:
+    -  The virtual write could not be scheduled (out of
     VirtualWrite buffers). If a notification was requested, DriverPoll
     will be driven with the notification at some later time when the
     virtual driver should retry sending.
-    * If no notification was requested, the virtual driver should return
+    -  If no notification was requested, the virtual driver should return
     from DriverPoll and wait for the next poll before retrying
     the send. This assumes that the virtual driver had selected the
     polled mode of operation.
 
-* CLIENT_ERROR_BUFFER_STILL_BUSY: If the user has called SendData requesting a notification, and the return code was CLIENT_ERROR_NO_OUTBUF, the user must not issue
-    another SendData call until the notification has occurred. If
-    another call is issued before the notification occurs, the
-    CLIENT_ERROR_BUFFER_STILL_BUSY return code will result.
-    
-* CLIENT_ERROR_*: Any other error should cause the virtual driver and the session to close.
+-  CLIENT_ERROR_BUFFER_STILL_BUSY: If the user has called SendData requesting a notification, and the return code was CLIENT_ERROR_NO_OUTBUF, the user must not issue another SendData call until the notification has occurred. If another call is issued before the notification occurs, the     `CLIENT_ERROR_BUFFER_STILL_BUSY` return code will result.
 
-!!!tip "Note"
-		If the user has specified HPC_VD_OPTIONS_NO_POLLING in the HPC
+-  CLIENT_ERROR_*: Any other error should cause the virtual driver and the session to close.
+
+> Note
+>
+> If the user has specified HPC_VD_OPTIONS_NO_POLLING in the HPC
 channel options, then the virtual driver must assume that its DriverPoll
 function will not be called again after receiving one of these errors.
 
@@ -582,12 +590,13 @@ virtual channel being monitored by the driver. The address of this
 function is passed to the WinStation driver during DriverOpen.
 
 ### Calling Convention
+
 ```
 VOID wfcapi ICADataArrival(
-	PVD pVD,
-	USHORT uchan,
-	LPBYTE pBuf,
-	USHORT Length);
+ PVD pVD,
+ USHORT uchan,
+ LPBYTE pBuf,
+ USHORT Length);
 ```
 
 ### Parameters
@@ -598,7 +607,6 @@ VOID wfcapi ICADataArrival(
 | uChan | Virtual channel number. |
 | pBuf | Pointer to the data buffer containing the virtual channel data as sent by the server-side application. |
 | Length | Length in bytes of the data in the buffer. |
-
 
 ### Return Value
 
@@ -640,9 +648,9 @@ Gets a Boolean value from a section of the Configuration Storage.
 
 ```
 INT miGetPrivateProfileBool(
-	PCHAR lpszSection,
-	PCHAR lpszEntry,
-	BOOL bDefault);
+ PCHAR lpszSection,
+ PCHAR lpszEntry,
+ BOOL bDefault);
 ```
 
 ### Parameters
@@ -652,7 +660,6 @@ INT miGetPrivateProfileBool(
 | lpsz Section | Name of section to query. |
 | lpsz Entry | Name of entry to query. |
 | bDefault | Default value to use. |
-
 
 ### Return Values
 
@@ -672,12 +679,12 @@ Gets an integer from a section of the Configuration Storage.
 
 ```
 INT miGetPrivateProfileInt(
-	PCHAR lpszSection,
-	PCHAR lpszEntry,
-	INT iDefault);
+ PCHAR lpszSection,
+ PCHAR lpszEntry,
+ INT iDefault);
 
 
-### Parameters 
+### Parameters
 | Parameter | Description |
 |-----------|-------------|
 | lpsz Section | Name of section to query. |
@@ -697,13 +704,15 @@ Gets a long value from a section of the configuration files.
 ### Calling Convention
 
 ```
+
 INT miGetPrivateProfileLong(
-	PCHAR lpszSection,
-	PCHAR lpszEntry,
-	LONG lDefault);
+ PCHAR lpszSection,
+ PCHAR lpszEntry,
+ LONG lDefault);
+
 ```
 
-### Parameters 
+### Parameters
 
 | Parameter | Description |
 |-----------|-------------|
@@ -724,11 +733,13 @@ Gets a string from a section of the configuration files.
 ### Calling Convention
 
 ```
+
 INT miGetPrivateProfileString(
-	PCHAR lpszSection,
-	PCHAR lpszEntry,
-	PCHAR lpszDefault,
-	PCHAR lpszReturnBuffer, INT cbSize);
+ PCHAR lpszSection,
+ PCHAR lpszEntry,
+ PCHAR lpszDefault,
+ PCHAR lpszReturnBuffer, INT cbSize);
+
 ```
 
 ### Parameters
@@ -770,13 +781,15 @@ be sent without having to wait for the poll.
 ### Calling Convention
 
 ```
+
 int WFCAPI
-QueueVirtualWrite ( 
+QueueVirtualWrite (
 PWD pWd,
 SHORT Channel,
-LPMEMORY_SECTION pMemorySections, 
+LPMEMORY_SECTION pMemorySections,
 USHORT NrOfSections,
 USHORT Flag);
+
 ```
 
 ### Parameters
@@ -794,11 +807,13 @@ USHORT Flag);
 This structure has the definition:
 
 ```
+
 typedef struct _MEMORY_SECTION
 {
-	UINT lenght;						//Length of data
-	LPBYTE pSection; 					//Address of data
-}	MEMORY SECTION,		far * LPMEMORY SECTION;
+ UINT lenght; //Length of data
+ LPBYTE pSection;  //Address of data
+} MEMORY SECTION, far * LPMEMORY SECTION;
+
 ```
 
 ### Return Values
@@ -833,10 +848,12 @@ drivers, this sets the virtual write hook.
 ### Calling Convention
 
 ```
+
 INT VdCallWd (
 PVD pVd,
 USHORT ProcIndex,
 PVOID pParam);
+
 ```
 
 ### Parameters
@@ -878,7 +895,9 @@ Closes an open virtual channel handle.
 ### Calling Convention
 
 ```
+
 BOOL WINAPI WFVirtualChannelClose(IN HANDLE hChannelHandle);
+
 ```
 
 ### Parameter
@@ -917,10 +936,12 @@ Opens a handle to a specific virtual channel.
 ### Calling Convention
 
 ```
-HANDLE WINAPI WFVirtualChannelOpen(IN HANDLE hServer, 
-									IN DWORD SessionId,
-									IN LPSTR pVirtualName // ANSI name 
-									);
+
+HANDLE WINAPI WFVirtualChannelOpen(IN HANDLE hServer,
+ IN DWORD SessionId,
+ IN LPSTR pVirtualName // ANSI name
+ );
+
 ```
 
 ### Parameters
@@ -953,7 +974,9 @@ specific virtual channel.
 ### Calling Convention
 
 ```
+
 BOOL WINAPI WFVirtualChannelPurgeInput(IN HANDLE hChannelHandle);
+
 ```
 
 ### Parameter
@@ -991,7 +1014,9 @@ queued to be sent to the client from the first file played.
 ### Calling Convention
 
 ```
+
 BOOL WINAPI WFVirtualChannelPurgeOutput(IN HANDLE hChannelHandle);
+
 ```
 
 ### Parameter
@@ -1025,11 +1050,13 @@ DriverInfo function.
 ### Calling Convention
 
 ```
+
 BOOL WINAPI WFVirtualChannelQuery(IN HANDLE hChannelHandle,
-								   IN WF_VIRTUAL_CLASS VirtualClass, 
-								   OUT PVOID \*ppBuffer,
-								   OUT DWORD \*pBytesReturned 
-								   );
+   IN WF_VIRTUAL_CLASS VirtualClass,
+   OUT PVOID \*ppBuffer,
+    OUT DWORD \*pBytesReturned
+   );
+
 ```
 
 ### Parameters
@@ -1055,12 +1082,19 @@ src\inc\). See the Ping example for more information.
 
 ## WFVirtualChannelRead
 
-Reads data from a virtual channel. 
+Reads data from a virtual channel.
 
 ### Calling Convention
 
 ```
-BOOL WINAPI WFVirtualChannelRead(IN HANDLE hChannelHandle,								  IN ULONG TimeOut, 								  OUT PCHAR pBuffer, 								  IN ULONG BufferSize,								  OUT PULONG pBytesRead								  );
+
+BOOL WINAPI WFVirtualChannelRead(IN HANDLE hChannelHandle,
+  IN ULONG TimeOut,
+ OUT PCHAR pBuffer,
+  IN ULONG BufferSize,
+  OUT PULONG pBytesRead
+  );
+
 ```
 ### Parameters
 
@@ -1105,8 +1139,14 @@ Writes data to a virtual channel.
 ### Calling Convention
 
 ```
-BOOL WINAPI WFVirtualChannelWrite	(IN HANDLE hChannelHandle,									 IN PCHAR pBuffer, 									 IN ULONG Length,									 OUT PULONG pBytesWritten									 );
-```
+
+BOOL WINAPI WFVirtualChannelWrite (IN HANDLE hChannelHandle,
+ IN PCHAR pBuffer,
+ IN ULONG Length,
+  OUT PULONG pBytesWritten
+  );
+
+```
 
 ### Parameters
 

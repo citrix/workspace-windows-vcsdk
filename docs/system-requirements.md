@@ -1,9 +1,6 @@
 # System Requirements
 
-Citrix Virtual Channel SDK can be installed on systems supported by
-Citrix Receiver for Windows. You can build the virtual drivers and
-applications on any platform. To run, they require a server running
-XenApp or XenDesktop.
+Citrix Virtual Channel SDK can be installed on systems supported by Citrix Workspace App for Windows. You can build the virtual drivers and applications on any platform. To run, they require a server running XenApp or XenDesktop.
 
 ## Development Environment Requirements
 
@@ -16,8 +13,10 @@ any other combinations.
 
 ## Execution Environment Requirements
 
-### Server requirement 
+### Server requirement
+
 The Windows Virtual Channel SDK is supported on Citrix XenApp 6.5 (or later) and Citrix XenDesktop 7.6 (or later)
 
 ### Client Requirement
-Citrix Receiver for Windows 4.7
+
+Citrix Workspace App for Windows 4.7 and later.
