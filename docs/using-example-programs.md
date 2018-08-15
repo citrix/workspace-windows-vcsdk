@@ -339,7 +339,7 @@ administrative template (.adm) file.
 CustomVC is a placeholder for the channel name of the virtual channel.
 
 ```
-;Group Policy template for Citrix Workspace App for Windows.
+;Group Policy template for Citrix Workspace app for Windows.
 ;Citrix Workspace app Client Extensions template
 ;Description:
 ;This file is provided as a base for third-party extensions
