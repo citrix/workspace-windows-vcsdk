@@ -1,5 +1,5 @@
-site_name: Citrix Virtual Channel SDK for Citrix Receiver for Windows
-site_description: Reference for the Citrix Virtual Channel SDK for Citrix Receiver for Windows
+site_name: Citrix Virtual Channel SDK for Citrix Workspace app for Windows
+site_description: Reference for the Citrix Virtual Channel SDK for Citrix Workspace app for Windows
 theme_dir: citrix-sdk
 markdown_extensions:
   - admonition

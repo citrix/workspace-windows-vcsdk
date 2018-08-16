@@ -19,4 +19,4 @@ The Windows Virtual Channel SDK is supported on Citrix XenApp 6.5 (or later) and
 
 ### Client Requirement
 
-Citrix Workspace App for Windows 4.7 and later.
+Citrix Workspace app for Windows 4.7 and later.
