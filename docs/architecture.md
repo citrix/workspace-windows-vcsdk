@@ -32,12 +32,12 @@ This figure illustrates the virtual channel client-server connection:
 
 ![alt_text!](./virtual-channel-overview.png)
 
-The WinStation driver is responsible for demultiplexing the virtual
+The `WinStation` driver is responsible for demultiplexing the virtual
 channel data from the ICA data stream and routing it to the correct
-processing module (in this case, the virtual driver). The WinStation
+processing module (in this case, the virtual driver). The `WinStation`
 driver is also responsible for gathering and sending virtual channel
 data to the server over the ICA connection. On the client side, the
-WinStation driver is also called the client engine, or simply the
+`WinStation` driver is also called the client engine, or simply the
 engine.
 
 The following is an overview of client-server data exchange using a
@@ -58,7 +58,7 @@ virtual channel:
 
 *  If the client virtual driver has data to send to the server, the data may be sent immediately, or it may be sent the next time the WinStation driver polls the virtual driver. When the data is received by the server, it is queued until the virtual channel application reads it. There is no way to alert the server virtual channel application that data was received.
 
-1.  When the server virtual channel application is finished, it closes
+4\.  When the server virtual channel application is finished, it closes
     the virtual channel and frees any allocated resources.
 
 ## ICA and Virtual Channel Data Packets
