@@ -1,4 +1,4 @@
-# Citrix Virtual Channel SDK for Citrix Workspace app 1808 for Windows 
+# Citrix Virtual Channel SDK for Citrix Workspace app 1808 for Windows
 
 The Citrix Virtual Channel Software Development Kit (SDK) provides
 support for writing server-side applications and client-side drivers for
