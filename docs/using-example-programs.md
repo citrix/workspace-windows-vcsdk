@@ -274,7 +274,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Citrix\ICAClient\Engine\Configuration\Advanced\Modul
 ### Running an Example Virtual Channel
 
 1.  On a client configured with the client-side example, connect to a
-    server running XenApp/XenDesktop with the associated
+    server running Citrix Virtual Apps and Desktops with the associated
     server-side example.
 
 2.  Within the ICA session, run the server-side executable.

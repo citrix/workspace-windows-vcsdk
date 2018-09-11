@@ -14,10 +14,10 @@ clients. Uses for virtual channels include:
 
 An ICA virtual channel is a bidirectional error-free connection for the
 exchange of generalized packet data between a client and a server
-running Citrix XenApp or XenDesktop. Each implementation of an ICA
+running Citrix Virtual Apps and Desktops. Each implementation of an ICA
 virtual channel consists of two components:
 
-*  Server-side portion on the computer running XenApp or XenDesktop
+*  Server-side portion on the computer running Citrix Virtual Apps and Desktops
 
  The virtual channel on the server side is a normal Win32 process; it can
 be either an application or a Windows NT service.
@@ -43,7 +43,7 @@ engine.
 The following is an overview of client-server data exchange using a
 virtual channel:
 
-1.  The client connects to the server running XenApp or XenDesktop. The
+1.  The client connects to the server running Citrix Virtual Apps and Desktops. The
     client passes information about the virtual channels it supports
     to the server.
 
@@ -266,7 +266,7 @@ the entire packet.
 ## Windows Monitoring API
 
 These APIs allow creating solutions that synchronize the visual aspects
-of an application that runs on a host (XenApp or XenDesktop) with
+of an application that runs on a host (Citrix Virtual Apps and Desktops) with
 corresponding visual elements that are running on Citrix Workspace app for Windows for
 Windows. The APIs consist of two different parts: client-side and
 host-side. The client- side component exposes previously unavailable
