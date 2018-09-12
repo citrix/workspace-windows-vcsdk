@@ -30,7 +30,7 @@ Writing for the client-side is similar to writing a driver, which must provide s
 
 Then the client can communicate to the server if the hardware is available before the server uses the new data format. Optionally, you could have the virtual driver translate the new data format for use with older hardware.
 
--  There might be limitations preventing your new virtual channel from performing at an optimum level. If the client is connecting to the server running XenApp through a modem or serial connection, the bandwidth might not be great enough to properly support audio or video data. You can make your protocol adaptive, so that as bandwidth decreases, performance degrades gracefully, possibly by sending sound normally but reducing the frame rate of the video to fit the available bandwidth.
+-  There might be limitations preventing your new virtual channel from performing at an optimum level. If the client is connecting to the server running Citrix Virtual Apps and Desktops through a modem or serial connection, the bandwidth might not be great enough to properly support audio or video data. You can make your protocol adaptive, so that as bandwidth decreases, performance degrades gracefully, possibly by sending sound normally but reducing the frame rate of the video to fit the available bandwidth.
 
 -  To identify where problems are occurring (connection, implementation, or protocol), first get the connection and communication working. Then, after the virtual channel is complete and debugged, do some time trials and record the results.These results establish a baseline for measuring further optimizations such as compression and other enhancements so that the channel requires less bandwidth.
 
@@ -40,7 +40,7 @@ src/inc/) for definitions of these structures.
 ## Server-Side Functions Overview
 
 Server-side functions are entry points to virtual channel services
-provided by the ICAsubsystem on the XenApp or XenDesktop server. Wfapi.h
+provided by the ICAsubsystem on the Citrix Virtual Apps and Desktops server. Wfapi.h
 contains constants and function prototypes.
 
 Use these functions to open and close virtual channels and to read,
