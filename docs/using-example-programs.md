@@ -233,24 +233,38 @@ MSI.
 >
 > Editing the Registry incorrectly can cause serious problems that may require you to reinstall your operating system. Citrix cannot guarantee that problems resulting from the incorrect use of Registry editor can be solved. Use the Registry Editor at your own risk. Be sure to back up the registry before you edit it.
 
-*  Locate the VirtualDriverEx string REG_SZ value in the HKEY_LOCAL_MACHINE\SOFTWARE\Citrix\ICAClient\Engine\Configuration\Advanced\Modules\ICA3.0 key. Append the name of the virtual driver to the end of this line, for example: `VirtualDriverEx = VDPING`.
-*  Under the HKEY_LOCAL_MACHINE\SOFTWARE\Citrix\ICAClient\Engine\Configuration\Advanced\Modules key, create a new key, where ; is VDMIX, VDOVER, VDPING. For VDPING, the section would be: `HKEY_LOCAL_MACHINE\SOFTWARE\Citrix\ICAClient\Engine\Configuration\Advanced\Modules\ VDPING`. Add the following string REG_SZ values under the above key:
+To add a virtual channel after  installing Citrix Workspace app, you must change the registry keys based on the mode of deployment.
 
-```
+**Admin-installation:**
 
-DriverName = VDPING.DLL
-DriverNameWin16 = VDPINGW.DLL
-DriverNameWin32 = VDPINGN.DLL
-PingCount = 3
+1.  Locate the VirtualDriverEx string REG_SZ value in the `HKEY_LOCAL_MACHINE\SOFTWARE\Citrix\ICA Client\Engine\Configuration\Advanced\Modules\ICA3.0` key (x86 bit). Append the name of the virtual driver to the end of this line.
 
-```
+    For example: VirtualDriverEx = VDPING, VDMIX, VDOVER, VDPING (should be comma separated)
 
-The client engine uses DriverName, DriverNameWin16, and
-DriverNameWin32 to determine the module filename to load for each
-platform. PingCount is a tunable parameter used by the Ping virtual
-channel.
+1.  Under the `HKEY_LOCAL_MACHINE\SOFTWARE\Citrix\ICA Client\Engine\Configuration\Advanced\Modules` key, create a new key where ; is VDMIX, VDOVER, VDPING. For VDPING, the section is: `HKEY_LOCAL_MACHINE\SOFTWARE\Citrix\ICA Client\Engine\Configuration\Advanced\Modules\VDPING`. Add the following string REG_SZ values under the above key:
+    DriverName          = VDPING.DLL
+    DriverNameWin16     = VDPINGW.DLL
+    DriverNameWin32     = VDPINGN.DLL
+    PingCount           = 3
 
-&#53;. Repackage the MSI for deployment.
+Incase of x64 bit, the registry location is `HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Citrix\ICA Client\Engine\Configuration\Advanced\Modules\ICA 3.0`.
+
+**User-installation:**
+
+1.  Locate the VirtualDriverEx string REG_SZ value in the HKEY_CURRENT_USER\SOFTWARE\Citrix\ICA Client\Engine\Configuration\Advanced\Modules\ICA3.0 key (x86 bit).  Append the name of the virtual driver to the end of this line.
+
+    For example: VirtualDriverEx = VDPING, VDMIX, VDOVER, VDPING (should be comma separated)
+1.  Under the `HKEY_CURRENT_USER\SOFTWARE\Citrix\ICA Client\Engine\Configuration\Advanced\Modules` key, create a new key, where ; is VDMIX, VDOVER, VDPING. For VDPING, the section is: `HKEY_LOCAL_MACHINE\SOFTWARE\Citrix\ICA Client\Engine\Configuration\Advanced\Modules\VDPING`. Add the following string REG_SZ values under the above key:
+    DriverName          = VDPING.DLL
+    DriverNameWin16     = VDPINGW.DLL
+    DriverNameWin32     = VDPINGN.DLL
+    PingCount           = 3
+
+These keys are retained post upgrade.
+
+> **Note:**
+>
+> Settings and configurations are retained on re-installation starting from Version 1912.
 
 ### To deploy the MSI
 
